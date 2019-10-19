@@ -1,3 +1,5 @@
+let time = 5;
+
 $(document).ready(function () {
   $('#newGame').modal(
     { 'dismissible': false });
@@ -291,13 +293,17 @@ function keyListener(e) {
 function pauseGame() {
   if (pause === true) {
     pause = false;
+    $('#pause').modal('close');
+    if (gotimer) {
+      clearInterval(gotimer)
+      gotimer = null
+    }
     update()
   } else {
+    timer(time, document.getElementById("timer"))
     $('#pause').modal(
       { 'dismissible': false });
     $('#pause').modal('open');
-
-
     if (collide(arena, player)) {
       pause = true;
       if (player.score > 0) {
@@ -324,6 +330,25 @@ function newGame() {
   update();
   document.addEventListener('keydown', keyListener);
   document.addEventListener('keyup', keyListener);
+}
+
+let gotimer = null
+function timer(time, display) {
+  gotimer = setInterval(() => {
+    display.innerHTML = time
+    time--
+    if (time < 0) {
+      time = 0;
+      $('#gameOver').modal({
+        'dismissible': false,
+        "onOpenEnd": function () { $('#name').focus(); }
+      });
+      $('#gameOver').modal('open');
+      $('#pause').modal('close');
+      clearInterval(gotimer)
+      gotimer = null
+    }
+  }, 1000);
 }
 
 update();
