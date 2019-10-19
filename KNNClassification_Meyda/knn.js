@@ -154,7 +154,7 @@ function gotResults(err, result) {
     if (result.label) {
       select('#result').html(result.label);
       select('#confidence').html(`${confidences[result.label] * 100} %`);
-      IOsock.emit('audio', result.label)
+      if (result.confidencesByLabel[result.label] && result.confidencesByLabel[result.label] > 0.75) IOsock.emit('audio', result.label)
     }
 
     select('#confidenceA').html(`${confidences['Silence'] ? confidences['Silence'] * 100 : 0} %`);
