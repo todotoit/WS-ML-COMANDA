@@ -5,8 +5,8 @@ var io = require('socket.io')(http);
 var debounceTime = 5 // millis
 var debouncing = false
 
-function dataHandler(data, msglabel) {
-  // console.log(data)
+function dataHandler(msglabel, data) {
+  console.log(msglabel, data)
   if (debouncing) return
   debouncing = true
   setTimeout(() => { debouncing = false }, debounceTime)
@@ -25,11 +25,11 @@ io.on('connection', function(socket){
   });
   socket.on('pose', (data) => {
     if (data == '') return
-    console.log('pose', data)
+    dataHandler('poseCmd', data)
   })
   socket.on('audio', (data) => {
     if (data == 0) return
-    console.log('audio', data)
+    dataHandler('audioCmd', data)
   })
 });
 

@@ -1,4 +1,5 @@
 let time = 5;
+const IOsock = io('http://localhost:3004');
 
 $(document).ready(function () {
   $('#newGame').modal(
@@ -75,6 +76,7 @@ function createMatrix(w, h) {
 }
 
 function createPiece(type) {
+  currentPose = type
   if (type === 'I') {
     return [
       [0, 1, 0, 0],
@@ -175,7 +177,8 @@ function playerMove(dir) {
 }
 
 function playerReset() {
-  const pieces = 'IJLOSTZ';
+  //const pieces = 'IJLOSTZ';
+  const pieces = 'L';
   if (player.next === null) {
     player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
     player.next = createPiece(pieces[pieces.length * Math.random() | 0]);
@@ -278,6 +281,8 @@ function keyListener(e) {
       pauseGame();
     }
   }
+
+  // down down down
   if (e.keyCode === 40) {
     if (e.type === 'keydown') {
       if (player.dropInterval !== DROP_FAST) {
@@ -328,6 +333,8 @@ function pauseGame() {
   }
 }
 
+
+let currentPose = null
 function newGame() {
   clearPlayer();
   pause = false;
@@ -335,6 +342,46 @@ function newGame() {
   update();
   document.addEventListener('keydown', keyListener);
   document.addEventListener('keyup', keyListener);
+
+  /*** commands
+
+  if pose if wrong
+  pauseGame();
+
+  ***********/
+
+  IOsock.on('poseCmd', (data) => {
+    console.log('pose', data)
+    if (data === currentPose && pause) {
+      pauseGame();
+    } else if (data != currentPose && !pause) {
+      pauseGame();
+    }
+  })
+
+
+  /*** commands
+
+  playerMove(-1)
+  playerMove(1);
+  playerRotate(-1);
+  playerRotate(1);
+
+  ***********/
+  IOsock.on('audioCmd', (data) => {
+    console.log('audio', data, data == 'Left')
+    switch(data) {
+      case 'Left':
+        playerMove(-1)
+      break;
+      case 'Right':
+        playerMove(1)
+      break;
+      case 'Turn':
+        playerRotate(-1)
+      break;
+    }
+  })
 }
 
 let gotimer = null

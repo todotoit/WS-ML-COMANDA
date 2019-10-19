@@ -1,10 +1,15 @@
+
+// tetris pieces
+// IJLOSTZ
 const button = [
-  { id: 0, block: '' },
-  { id: 1, block: 'L' },
-  { id: 2, block: 'O' },
-  { id: 3, block: 'Z' },
-  { id: 4, block: 'T' },
-  { id: 5, block: 'I' }
+  { id: 0, block: 'Null' },
+  { id: 1, block: 'I' },
+  { id: 2, block: 'J' },
+  { id: 3, block: 'L' },
+  { id: 4, block: 'O' },
+  { id: 5, block: 'S' },
+  { id: 5, block: 'T' },
+  { id: 5, block: 'Z' }
 ]
 
 const IOsock = io('http://localhost:3004');
