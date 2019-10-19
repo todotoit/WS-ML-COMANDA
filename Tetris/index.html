@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tetris</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div class="wrapper">
+
+
+    <div id="newGame" class="modal">
+      <div class="modal-content">
+        <h4>HUMAN TETRIS</h4>
+        <p id="hint">Get your iron tights ready </p>
+        <button onclick="newGame()" id="newGameBtn" class="modal-close waves-light btn" style="width:180px">START THE
+          GAME</button>
+      </div>
+    </div>
+
+    <div id="pause" class="modal">
+      <div class="modal-content">
+        <h4>PAUSE</h4>
+        <p>Hold Still! <br> Less human and more block!</p>
+        <div class="wrap">
+          <button onclick="pauseGame()" id="pauseBtn" class="modal-close waves-light btn">RESUME</button>
+          <button onclick="newGame()" id="StartNewBtn" class="modal-close waves-light btn">START NEW
+            GAME</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="gameOver" class="modal">
+      <div class="modal-content">
+        <h4>GAME OVER</h4>
+        <div class="yourScore">Your score : 100</div>
+        <button onclick="newGame()" class="modal-close waves-light btn">START NEW GAME</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Hack
+        by</a>
+        <a href="https://todo.to.it" target="_blank"><i></i>TODO</a>
+    </div>
+    </p>
+  </div>
+
+  <div class="ui">
+    <div class="detailsLeft">
+      <p class="score"></p>
+      <p class="level"></p>
+      <div class="highScores"></div>
+    </div>
+    <canvas class="tetris" width="240" height="400"></canvas>
+    <div class="detailsRight">
+      <p> Next Position</p>
+      <canvas class="next" width="160" height="160"></canvas>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+  <script src="sketch.js"></script>
+
+</body>
+
+</html>
