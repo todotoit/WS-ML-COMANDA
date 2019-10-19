@@ -10,6 +10,7 @@ body, html {
   text-align: center;
   width: 100%;
   height: 100%;
+  padding: 0.5rem;
 }
 
 button {
@@ -80,41 +81,12 @@ button {
   padding-bottom: 0px;
 }
 
-.detailsLeft {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 90vh;
-  margin: 0;
-  text-align: right;
-  font-size: 16px;
-}
-
-.detailsLeft p {
-  font-size: 1.4rem;
-  line-height: 150%;
-}
-
 .highScores {
   position: absolute;
   bottom: 35px;
   right: 0px;
   line-height: 10px;
   font-size: 14px;
-}
-
-.detailsRight {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 90vh;
-  text-align: left;
-  margin: 0% 2%;
-}
-
-.detailsRight p {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
 }
 
 .next {
@@ -130,18 +102,10 @@ button {
   line-height: 8px;
 }
 
-.tetris {
-  height: 90vh;
-  border: solid 2px #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
-
 .footer {
   position: absolute;
+  width: 100%;
+  text-align: center;
   bottom: 20px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.85);
@@ -170,23 +134,13 @@ button {
   background-color: #00F29B;
 }
 
+#pause .modal-content {
+  padding: 2rem !important;
+}
+
 #pause .modal-content p {
-  margin: 1rem;
-  margin-bottom: 2rem;
-}
-
-#pause .modal-content .wrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-#pause .modal-content button {
-  background-color: #00F29B;
-  color: black;
-  border: none;
-  width: 50%;
-  border-radius: 0;
+  margin-top: 1rem;
+  line-height: 150%;
 }
 
 .modal {
@@ -204,8 +158,48 @@ button {
 
 .ui {
   max-width: 1000px;
+  height: 92vh !important;
   position: relative;
   margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0.2rem;
+}
+
+.ui .detailsLeft {
+  margin: 0;
+  text-align: right;
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ui .detailsLeft p {
+  font-size: 1.4rem;
+  line-height: 150%;
+}
+
+.ui .tetris {
   height: 100%;
+  border: solid 2px #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.ui .detailsRight {
+  text-align: left;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.ui .detailsRight p {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
 }
 /*# sourceMappingURL=style.css.map */

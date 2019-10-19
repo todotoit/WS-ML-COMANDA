@@ -5,18 +5,13 @@ $(document).ready(function () {
   $("#newGameBtn").focus()
   updateScore()
 });
-
 let pause = true;
-
 const canvas = document.querySelector('.tetris');
 const context = canvas.getContext('2d');
-
 const nextCanvas = document.querySelector('.next');
 const nextContext = nextCanvas.getContext('2d');
-
 context.scale(20, 20);
 nextContext.scale(30, 30);
-
 const arena = createMatrix(12, 20);
 const nextArena = createMatrix(6, 6);
 
@@ -126,7 +121,6 @@ function createPiece(type) {
 function drawNext() {
   nextContext.fillStyle = '#001e26';
   nextContext.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
-
   drawMatrix(nextArena, { x: 0, y: 0 }, nextContext);
   drawMatrix(player.next, { x: 1, y: 1 }, nextContext);
 }
@@ -134,7 +128,6 @@ function drawNext() {
 function draw() {
   context.fillStyle = '#001e26';
   context.fillRect(0, 0, canvas.width, canvas.height);
-
   drawMatrix(arena, { x: 0, y: 0 }, context);
   drawMatrix(player.matrix, player.pos, context);
 }
@@ -195,7 +188,6 @@ function playerReset() {
     pauseGame();
     document.removeEventListener('keydown', keyListener);
     document.removeEventListener('keyup', keyListener);
-    // clearPlayer();
   }
 }
 
@@ -268,9 +260,6 @@ const colors = [
   '#CEFF00',//S 
   '#00F29B',//T
   '#F15A24'//Z
-  //'#5126EF',//I
-  //'#C5A3D8',//J
-  //'#F15A24',//L
 ];
 
 function keyListener(e) {
@@ -287,7 +276,6 @@ function keyListener(e) {
       pauseGame();
     }
   }
-
   if (e.keyCode === 40) {
     if (e.type === 'keydown') {
       if (player.dropInterval !== DROP_FAST) {
@@ -305,6 +293,11 @@ function pauseGame() {
     pause = false;
     update()
   } else {
+    $('#pause').modal(
+      { 'dismissible': false });
+    $('#pause').modal('open');
+
+
     if (collide(arena, player)) {
       pause = true;
       if (player.score > 0) {
