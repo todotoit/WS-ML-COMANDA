@@ -306,17 +306,22 @@ function pauseGame() {
     $('#pause').modal('open');
     if (collide(arena, player)) {
       pause = true;
-      if (player.score > 0) {
+      $('#pause').modal('close');
+      if (gotimer) {
+        clearInterval(gotimer)
+        gotimer = null
+      }
+      //if (player.score > 0) {
         $('#gameOver').modal({
           'dismissible': false,
           "onOpenEnd": function () { $('#name').focus(); }
         });
         $('#gameOver').modal('open');
         $('.yourScore').html(`<p>Your Score: ${player.score}`)
-      } else {
+      /* } else {
         $('#newGame').modal({ 'dismissible': false });
         $('#newGame').modal('open');
-      }
+      } */
     } else {
       pause = true;
     }
