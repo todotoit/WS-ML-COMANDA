@@ -1,0 +1,90 @@
+h1, h2, h3, h4, h5, h6, p, span {
+  padding: 0;
+  margin: 0;
+}
+
+#title {
+  margin-bottom: 0.2rem;
+}
+
+button {
+  margin: 0.2rem;
+  width: 100px;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.button-map {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background: #1c1c1c;
+  color: white;
+  padding: 0.5rem;
+  margin: 0;
+}
+
+button {
+  border: none;
+  padding: 0.5rem;
+  display: inline-block;
+  background-color: gray;
+  color: white;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  margin-bottom: 0.2rem;
+}
+
+.mainContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 1rem;
+}
+
+.mainContainer #left {
+  width: 100%;
+}
+
+.mainContainer #right {
+  width: 100%;
+  padding-left: 0.2rem;
+}
+
+button:focus {
+  outline: 0;
+}
+
+#results {
+  font-size: 3rem;
+}
+
+[id^="container-"] {
+  border: 1px solid white;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+}
+
+[id^="confidence-"] {
+  width: 100%;
+  background-color: white;
+  color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  padding: 0.2rem;
+}
+/*# sourceMappingURL=style.css.map */
