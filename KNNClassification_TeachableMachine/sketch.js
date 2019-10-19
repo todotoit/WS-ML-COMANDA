@@ -1,10 +1,12 @@
 const button = [
   { id: 0, block: 'L' },
-  { id: 1, block: '[]' },
-  { id: 2, block: 'z' },
-  // { id: 3, block: 'T' },
-  // { id: 4, block: 'I' },
+  { id: 1, block: 'O' },
+  { id: 2, block: 'Z' },
+  { id: 3, block: 'T' },
+  { id: 4, block: 'I' }
 ]
+
+const IOsock = io('http://localhost:3004');
 
 let init = function () {
   for (let i = 0; i < button.length; i++) {
@@ -44,6 +46,7 @@ let featureExtractor;
 function setup() {
   // Create a featureExtractor that can extract the already learned features from MobileNet
   featureExtractor = ml5.featureExtractor('MobileNet', modelReady);
+
   noCanvas();
   video = createCapture(VIDEO);
   video.parent('videoContainer');
@@ -103,6 +106,7 @@ function gotResults(err, result) {
     if (result.label) {
       select('#result').html(result.label);
       select('#confidence').html(`${confidences[result.label] * 100} %`);
+      IOsock.emit('pose', result.label)
     }
     for (let i = 0; i < button.length; i++) {
       select('#confidence-' + i).html(`${confidences[button[i].block] ? Math.floor(confidences[button[i].block] * 100) : 0}`)
@@ -110,10 +114,6 @@ function gotResults(err, result) {
     }
   }
   classify();
-
-  
-
-
 }
 
 // Update the example count for each label	

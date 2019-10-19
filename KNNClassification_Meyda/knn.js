@@ -11,6 +11,8 @@ let microphone;
 // Create a KNN classifier
 const knnClassifier = ml5.KNNClassifier();
 const context = new AudioContext();
+
+const IOsock = io('http://localhost:3004');
 let poses = [];
 
 function setup() {
@@ -18,6 +20,10 @@ function setup() {
 
   // Create the UI buttons
   createButtons();
+  buttonSetData = select('#load');
+  buttonSetData.mousePressed(loadMyKNN);
+  buttonGetData = select('#save');
+  buttonGetData.mousePressed(saveMyKNN);
 
   navigator.mediaDevices.getUserMedia({audio: true})
   .then((stream) => {
@@ -85,25 +91,45 @@ function createButtons() {
   // from the video with a label of "A" to the classifier
   buttonA = select('#addClassA');
   buttonA.mousePressed(function() {
-    addExample('A');
+    addExample('Silence');
   });
 
   // When the B button is pressed, add the current frame
   // from the video with a label of "B" to the classifier
   buttonB = select('#addClassB');
   buttonB.mousePressed(function() {
-    addExample('B');
+    addExample('Left');
+  });
+
+  buttonC = select('#addClassC');
+  buttonC.mousePressed(function() {
+    addExample('Right');
+  });
+
+  buttonD = select('#addClassD');
+  buttonD.mousePressed(function() {
+    addExample('Turn');
   });
 
   // Reset buttons
   resetBtnA = select('#resetA');
   resetBtnA.mousePressed(function() {
-    clearLabel('A');
+    clearLabel('Silence');
   });
 	
   resetBtnB = select('#resetB');
   resetBtnB.mousePressed(function() {
-    clearLabel('B');
+    clearLabel('Left');
+  });
+
+  resetBtnC = select('#resetC');
+  resetBtnC.mousePressed(function() {
+    clearLabel('Right');
+  });
+	
+  resetBtnD = select('#resetD');
+  resetBtnD.mousePressed(function() {
+    clearLabel('Turn');
   });
 
   // Predict button
@@ -128,10 +154,13 @@ function gotResults(err, result) {
     if (result.label) {
       select('#result').html(result.label);
       select('#confidence').html(`${confidences[result.label] * 100} %`);
+      IOsock.emit('audio', result.label)
     }
 
-    select('#confidenceA').html(`${confidences['A'] ? confidences['A'] * 100 : 0} %`);
-    select('#confidenceB').html(`${confidences['B'] ? confidences['B'] * 100 : 0} %`);
+    select('#confidenceA').html(`${confidences['Silence'] ? confidences['Silence'] * 100 : 0} %`);
+    select('#confidenceB').html(`${confidences['Left'] ? confidences['Left'] * 100 : 0} %`);
+    select('#confidenceC').html(`${confidences['Right'] ? confidences['Right'] * 100 : 0} %`);
+    select('#confidenceD').html(`${confidences['Turn'] ? confidences['Turn'] * 100 : 0} %`);
   }
 
   classify();
@@ -141,8 +170,10 @@ function gotResults(err, result) {
 function updateCounts() {
   const counts = knnClassifier.getCountByLabel();
 
-  select('#exampleA').html(counts['A'] || 0);
-  select('#exampleB').html(counts['B'] || 0);
+  select('#exampleA').html(counts['Silence'] || 0);
+  select('#exampleB').html(counts['Left'] || 0);
+  select('#exampleC').html(counts['Right'] || 0);
+  select('#exampleD').html(counts['Turn'] || 0);
 }
 
 // Clear the examples in one label
@@ -155,4 +186,14 @@ function clearLabel(classLabel) {
 function clearAllLabels() {
   knnClassifier.clearAllLabels();
   updateCounts();
+}
+
+// Save dataset as myKNNDataset.json
+function saveMyKNN() {
+  knnClassifier.save('audioKNN');
+}
+
+// Load dataset to the classifier
+function loadMyKNN() {
+  knnClassifier.load('./audioKNN.json', updateCounts);
 }
