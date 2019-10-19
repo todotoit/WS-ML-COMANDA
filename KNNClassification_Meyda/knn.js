@@ -190,10 +190,10 @@ function clearAllLabels() {
 
 // Save dataset as myKNNDataset.json
 function saveMyKNN() {
-  knnClassifier.save('audioKNN');
+  knnClassifier.save('trained');
 }
 
 // Load dataset to the classifier
 function loadMyKNN() {
-  knnClassifier.load('./audioKNN.json', updateCounts);
+  knnClassifier.load('./trained.json', updateCounts);
 }
