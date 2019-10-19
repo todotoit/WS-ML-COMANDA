@@ -24,7 +24,7 @@ io.on('connection', function(socket){
     console.log('message: ' + msg);
   });
   socket.on('pose', (data) => {
-    if (data == L) return
+    if (data == '') return
     console.log('pose', data)
   })
   socket.on('audio', (data) => {

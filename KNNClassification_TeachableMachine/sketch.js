@@ -1,9 +1,10 @@
 const button = [
-  { id: 0, block: 'L' },
-  { id: 1, block: 'O' },
-  { id: 2, block: 'Z' },
-  { id: 3, block: 'T' },
-  { id: 4, block: 'I' }
+  { id: 0, block: '' },
+  { id: 1, block: 'L' },
+  { id: 2, block: 'O' },
+  { id: 3, block: 'Z' },
+  { id: 4, block: 'T' },
+  { id: 5, block: 'I' }
 ]
 
 const IOsock = io('http://localhost:3004');
