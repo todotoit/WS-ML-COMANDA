@@ -138,7 +138,7 @@ function clearAllLabels() {
 
 // Save dataset as myKNNDataset.json
 function saveMyKNN() {
-  knnClassifier.save('myKNNDataset');
+  knnClassifier.save('trained');
 }
 
 // Load dataset to the classifier
