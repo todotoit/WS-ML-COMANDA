@@ -255,10 +255,10 @@ function updateScore() {
 
 const colors = [
   null,
-  '#AD88FC',//I
+  '#EDB0FF',//I
   '#FF406F',//J
   '#2A5FFF',//L
-  '#957FEF',//O
+  '#8C79E0',//O
   '#CEFF00',//S 
   '#00F29B',//T
   '#F15A24'//Z
