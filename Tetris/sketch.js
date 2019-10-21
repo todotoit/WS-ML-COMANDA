@@ -23,7 +23,7 @@ const player = {
   matrix: null,
   score: 0,
   level: 1,
-  dropInterval: 1000,
+  dropInterval: 600,
   DROP_SLOW: 100,
   next: null,
 };
@@ -178,7 +178,7 @@ function playerMove(dir) {
 
 function playerReset() {
   //const pieces = 'IJLOSTZ';
-  const pieces = 'L';
+  const pieces = 'ILOST';
   if (player.next === null) {
     player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
     player.next = createPiece(pieces[pieces.length * Math.random() | 0]);
@@ -351,7 +351,7 @@ function newGame() {
   ***********/
 
   IOsock.on('poseCmd', (data) => {
-    console.log('pose', data)
+    //console.log('pose', data)
     if (data === currentPose && pause) {
       pauseGame();
     } else if (data != currentPose && !pause) {
@@ -369,7 +369,7 @@ function newGame() {
 
   ***********/
   IOsock.on('audioCmd', (data) => {
-    console.log('audio', data, data == 'Left')
+    //console.log('audio', data, data == 'Left')
     switch(data) {
       case 'Left':
         playerMove(-1)
